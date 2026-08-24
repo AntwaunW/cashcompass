@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables (SECRETS — never commit these)
+.env
+**/.env
+
+# Build outputs
+dist/
+build/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
