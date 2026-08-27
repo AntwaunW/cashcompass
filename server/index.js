@@ -15,6 +15,9 @@ const userRoutes = require('./routes/userRoutes');
 
 const debtRoutes = require('./routes/debtRoutes');
 
+// Import the goal routes
+const goalRoutes = require('./routes/goalRoutes');
+
 // Actually connect to MongoDB (runs the function we just imported)
 connectDB();
 
@@ -28,6 +31,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('CashCompass server is running!');
 });
+
+// Mount the goal routes at "/api/goals"
+app.use('/api/goals', goalRoutes);
 
 // Mount the bill routes at "/api/bills"
 // Every route inside billRoutes is now prefixed with /api/bills
