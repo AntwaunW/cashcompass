@@ -21,6 +21,12 @@ const goalRoutes = require('./routes/goalRoutes');
 // Import the income routes
 const incomeRoutes = require('./routes/incomeRoutes');
 
+// Import the variable expense routes
+const variableExpenseRoutes = require('./routes/variableExpenseRoutes');
+
+// Import the logged entry routes
+const loggedEntryRoutes = require('./routes/loggedEntryRoutes');
+
 // Actually connect to MongoDB (runs the function we just imported)
 connectDB();
 
@@ -34,6 +40,12 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('CashCompass server is running!');
 });
+
+// Mount the logged entry routes at "/api/logged-entries"
+app.use('/api/logged-entries', loggedEntryRoutes);
+
+// Mount the variable expense routes at "/api/variable-expenses"
+app.use('/api/variable-expenses', variableExpenseRoutes);
 
 // Mount the income routes at "/api/income"
 app.use('/api/income', incomeRoutes);
