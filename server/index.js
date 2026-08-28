@@ -18,6 +18,9 @@ const debtRoutes = require('./routes/debtRoutes');
 // Import the goal routes
 const goalRoutes = require('./routes/goalRoutes');
 
+// Import the income routes
+const incomeRoutes = require('./routes/incomeRoutes');
+
 // Actually connect to MongoDB (runs the function we just imported)
 connectDB();
 
@@ -31,6 +34,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('CashCompass server is running!');
 });
+
+// Mount the income routes at "/api/income"
+app.use('/api/income', incomeRoutes);
 
 // Mount the goal routes at "/api/goals"
 app.use('/api/goals', goalRoutes);
