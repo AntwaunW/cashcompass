@@ -4,6 +4,10 @@ require('dotenv').config();
 // Import the Express library we installed
 const express = require('express');
 
+// Lets the React frontend (running on a different origin during development)
+// make requests to this API — without it the browser blocks the requests.
+const cors = require('cors');
+
 // Import our database connection function from config/db.js
 const connectDB = require('./config/db');
 
@@ -27,11 +31,22 @@ const variableExpenseRoutes = require('./routes/variableExpenseRoutes');
 // Import the logged entry routes
 const loggedEntryRoutes = require('./routes/loggedEntryRoutes');
 
+// Import the projection routes (the cash-flow forecast / debt payoff /
+// goal pacing / investable surplus endpoints)
+const projectionRoutes = require('./routes/projectionRoutes');
+
+// Import the 404 + generic error handlers (registered at the very end, below)
+const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+
 // Actually connect to MongoDB (runs the function we just imported)
 connectDB();
 
 // Create the Express app — this "app" object IS our server
 const app = express();
+
+// Middleware: only allow requests from the configured frontend origin
+// (falls back to the typical local Vite dev server port if unset)
+app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:5173' }));
 
 // Middleware: lets the server understand JSON sent in request bodies (e.g. from React later)
 app.use(express.json());
@@ -63,6 +78,16 @@ app.use('/api/debts', debtRoutes);
 
 // Mount the user routes at "/api/users"
 app.use('/api/users', userRoutes);
+
+// Mount the projection routes at "/api/projection"
+app.use('/api/projection', projectionRoutes);
+
+// These must be registered LAST, after every route above — Express checks
+// middleware in order, so anything that doesn't match a route above falls
+// through to notFound, and any error thrown/passed to next() anywhere above
+// falls through to errorHandler.
+app.use(notFound);
+app.use(errorHandler);
 
 // Read the port from .env, or fall back to 5000 if it's missing
 const PORT = process.env.PORT || 5000;

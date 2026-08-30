@@ -1,15 +1,26 @@
-// Import Express and create a router (a mini, modular set of routes)
 const express = require('express');
 const router = express.Router();
 
-// Import the controller functions that will run for each route
-const { createBill, getBills } = require('../controllers/billController');
+// Import the controller functions
+const { createBill, getBills, updateBill, deleteBill } = require('../controllers/billController');
 
-// When a POST request hits this router's "/", run createBill
+// Import the auth middleware — every route below requires a valid JWT
+const { protect } = require('../middleware/authMiddleware');
+
+// Applying protect here (once, via router.use) means every route defined
+// after this line requires a logged-in user — no need to repeat it per-route.
+router.use(protect);
+
+// POST /  → create a bill
 router.post('/', createBill);
 
-// When a GET request hits this router's "/", run getBills
+// GET /   → get all of the logged-in user's bills
 router.get('/', getBills);
 
-// Export the router so index.js can plug it in
+// PUT /:id   → update one of the logged-in user's bills
+router.put('/:id', updateBill);
+
+// DELETE /:id   → delete one of the logged-in user's bills
+router.delete('/:id', deleteBill);
+
 module.exports = router;
