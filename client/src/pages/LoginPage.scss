@@ -1,0 +1,101 @@
+@use "../styles/variables" as *;
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(120% 55% at 50% 0%, $emerald-glow, transparent 55%),
+    $void;
+
+  &__card {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 32px;
+    background: linear-gradient(180deg, $coal-2, $coal);
+    border: 1px solid $line;
+    border-radius: $radius-lg;
+    box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 300;
+    font-size: 1.9rem;
+    color: $text;
+  }
+
+  &__subtitle {
+    color: $muted;
+    font-size: 0.9rem;
+    margin: 6px 0 28px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: $muted;
+  }
+
+  &__input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $line;
+    border-radius: $radius-sm;
+    padding: 12px 14px;
+    color: $text;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &::placeholder { color: $muted-2; }
+
+    &:focus {
+      border-color: $gold;
+      box-shadow: 0 0 0 3px $gold-glow;
+    }
+  }
+
+  &__error {
+    color: $rose;
+    font-size: 0.84rem;
+    margin: -4px 0 0;
+  }
+
+  &__button {
+    margin-top: 8px;
+    padding: 13px;
+    border: none;
+    border-radius: $radius-sm;
+    background: linear-gradient(180deg, $gold, $gold-deep);
+    color: $void;
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: 0.98rem;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px -8px $gold-glow;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// The "&__" nesting: & = the parent selector. So inside .login, "&__card"
+// compiles to ".login__card". It keeps related styles grouped and readable.

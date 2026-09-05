@@ -10,7 +10,6 @@ const createBill = async (req, res) => {
     // Note: "user" is NOT read from the body anymore — trusting a client-supplied
     // owner id would let anyone create data under someone else's account. The
     // owner now always comes from req.user, which the `protect` middleware
-    // attached after verifying the request's JWT.
     const { name, amount, dueDay, frequency, category } = req.body;
 
     // Basic validation: name and amount are the essentials — reject if missing

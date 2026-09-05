@@ -1,0 +1,38 @@
+// ============================================
+// CashCompass — Design Tokens
+// The single source of truth for the app's look.
+// Change a value here → it updates everywhere.
+// ============================================
+
+// ---- Base (near-black with emerald undertone) ----
+$void:        #080C0A;   // deepest background
+$coal:        #0D1512;   // card base (black-green)
+$coal-2:      #12201A;   // raised card (emerald emerges)
+$emerald:     #17402F;   // emerald accent surface
+
+// ---- The wealth accent (champagne gold) ----
+$gold:        #E6C892;   // primary gold
+$gold-deep:   #C79A54;   // deeper gold (gradients, edges)
+
+// ---- Semantic feedback ----
+$green-up:    #8FD9B0;   // positive / success (loud, refined)
+$rose:        #D3A2A2;   // caution (subtle whisper — never alarming)
+
+// ---- Text ----
+$text:        #F1EEE4;   // primary text (warm off-white)
+$muted:       #839185;   // secondary text
+$muted-2:     #55635B;   // faint labels / eyebrows
+
+// ---- Lines & glows ----
+$line:        rgba(198, 166, 100, 0.15);   // faint gold hairline borders
+$gold-glow:   rgba(230, 200, 146, 0.22);   // gold light bleed
+$emerald-glow: rgba(23, 64, 47, 0.55);     // emerald light bleed
+
+// ---- Type ----
+$font-display: "Fraunces", Georgia, serif;   // elegant serif for headlines
+$font-body:    "Inter", system-ui, sans-serif; // clean sans for body
+
+// ---- Shape ----
+$radius-lg: 22px;   // hero cards
+$radius-md: 18px;   // standard cards
+$radius-sm: 11px;   // small elements
